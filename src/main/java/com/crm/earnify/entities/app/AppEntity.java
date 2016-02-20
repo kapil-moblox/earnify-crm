@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * @author sandeepandey
+ */
 @Entity
 @Table(name = "app_master")
 public class AppEntity extends EarnifyPersistableEntity<Integer> {
@@ -25,6 +28,9 @@ public class AppEntity extends EarnifyPersistableEntity<Integer> {
     private String appGooglePlayURL;
     private String appWebsiteURL;
     private String appPromotionalBanner;
+    private String appVersion;
+    private String packageName;
+    private String appDomain;
     private Date   lastUpdatedOnGooglePlay;
     private OrganizationalEntity fromOrganization;
 
@@ -102,6 +108,33 @@ public class AppEntity extends EarnifyPersistableEntity<Integer> {
 
     public void setAppSize(String appSize) {
         this.appSize = appSize;
+    }
+
+    @Column(name = "app_version")
+    public String getAppVersion() {
+        return appVersion;
+    }
+
+    public void setAppVersion(String appVersion) {
+        this.appVersion = appVersion;
+    }
+
+    @Column(name = "app_package_name")
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
+    @Column(name = "app_domain")
+    public String getAppDomain() {
+        return appDomain;
+    }
+
+    public void setAppDomain(String appDomain) {
+        this.appDomain = appDomain;
     }
 
     @Column(name = "app_google_play_url")

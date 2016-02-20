@@ -2,7 +2,6 @@ package com.crm.earnify.entities.org;
 
 import com.crm.earnify.entities.EarnifyPersistableEntity;
 import com.crm.earnify.entities.app.AppEntity;
-import com.crm.earnify.entities.user.system.SystemUserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,20 +13,21 @@ import java.util.Collection;
 public class OrganizationalEntity extends EarnifyPersistableEntity<Integer> {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrganizationalEntity.class);
-    private Integer id;
+    private Long id;
     private String orgName;
     private String orgCode;
     private String description;
     private Collection<AppEntity> lunchedApps ;
-    private Collection<SystemUserEntity> attachSystemUsers;
+
+
     @Id
     @Column(name = "org_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -68,14 +68,6 @@ public class OrganizationalEntity extends EarnifyPersistableEntity<Integer> {
         return lunchedApps;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "fromOrganization",cascade = CascadeType.ALL)
-    public Collection<SystemUserEntity> getAttachSystemUsers() {
-        return attachSystemUsers;
-    }
-
-    public void setAttachSystemUsers(Collection<SystemUserEntity> attachSystemUsers) {
-        this.attachSystemUsers = attachSystemUsers;
-    }
 
     public void setLunchedApps(Collection<AppEntity> lunchedApps) {
         this.lunchedApps = lunchedApps;
@@ -89,7 +81,6 @@ public class OrganizationalEntity extends EarnifyPersistableEntity<Integer> {
                 ", orgCode='" + orgCode + '\'' +
                 ", description='" + description + '\'' +
                 ", lunchedApps=" + lunchedApps +
-                ", attachSystemUsers=" + attachSystemUsers +
                 '}';
     }
 }

@@ -8,6 +8,11 @@ import org.springframework.stereotype.Controller;
  * @author sandeepandey
  */
 @Controller
-public class CampaignController {
-	private static final Logger log = LoggerFactory.getLogger(CampaignController.class);
+public class CampaignController extends EarnifyController {
+    private static final Logger ELogger = LoggerFactory.getLogger(CampaignController.class);
+
+
+
+
+
 }

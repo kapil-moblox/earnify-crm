@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class CRMLoginController {
+public class CRMLoginController extends EarnifyController{
 	private static final Logger log = LoggerFactory.getLogger(CRMLoginController.class);
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
@@ -19,4 +19,6 @@ public class CRMLoginController {
 		ModelAndView model = new ModelAndView("login");
 		return model;
 	}
+
+
 }
