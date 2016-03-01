@@ -1,0 +1,23 @@
+{
+	"orgName":"Earnify",
+	"orgCode":"ER",
+	"orgDescription":"Earnify",
+	"launchedApps":[ {
+		"appName":"Diamond Cash App",
+		"appCode":"AAC",
+		"appDescription":"D Description",
+		"appImage":"app Image",
+		"appCatageory":"Mobile",
+		"appRating":"****",
+		"appSize":"21.1MB",
+		"appGooglePlayURL":"some url",
+		"appWebsiteURL":"app_website_url",
+		"appPromotionalBanner":"app_promotional_banner",
+		"appVersion":"some app version",
+		"packageName":"some package name",
+		"appDomain":"app Domain",
+		"lastUpdatedOnGooglePlay":null
+		}
+	]
+
+}

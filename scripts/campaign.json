@@ -1,0 +1,45 @@
+{
+	"campaignCode":"A",
+	"campaignName":"For Testing purpose",
+	"appCode": "AAC",
+	"adunitCode":"deal",
+	"clickTypeCode":"S",
+	"description":"This is testing campaign",
+	"totalPayout":"10.34",
+	"payoutCode":"A",
+	"tagLine":"No offer",
+	"payoutLine":"Payout not supported",
+	"attachedTaskModels":[
+		{
+			"tagLine":"No tagline form supported",
+			"payoutLine":"",
+			"instructions":"Some instructions are there to be publish",
+			"payout":100.89,
+			"disclaimer":"disclaimer is absent",
+			"ctaURL":"Some cat ctaURL",
+			"callbackURL":"some call back url",
+			"executableTaskModels":[
+				{
+					"selfId": 1 ,
+					"parentId": "0",
+					"taskTypeCode":"install",
+					"actionId":"1"
+				},
+				{
+					"selfId": 2 ,
+					"parentId": "1",
+					"taskTypeCode":"launch",
+					"actionId":"1"
+				
+				},
+				{
+					"selfId": 3 ,
+					"parentId": "2",
+					"taskTypeCode":"refer",
+					"actionId":"1"
+				
+				}
+			]
+		}
+	]
+}

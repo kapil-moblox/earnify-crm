@@ -1,0 +1,65 @@
+{
+  "requestProtocol": "PROTOCOL_JSON",
+  "installation_source": "organic",
+  "platform": "android",
+  "oem": "Xiaomi",
+  "responseProtocol": "PROTOCOL_JSON",
+  "network_type": "mobile",
+  "location": "",
+  "device_id": "867935029642989",
+  "IMEI_no": "867935029642989",
+  "orgID": "1001_1",
+  "apiKey": "snapdeal",
+  "os_version": "4.4.4",
+  "application_version": "5.5.1",
+  "phone_no": "",
+  "active": "true",
+  "push_token_id": "ct_i4GeCI6E:APA91bFHoWV6VgLBcg3uLnwe0-62Rivh6w-J4yjnCTXcxgXBj-VnyUbuKTWCXBiGDZJLjQq7zT2zahGlT0fnS8lsZkTZSG4Gl-sjLTWcNupfyRGsY0zQpuQYaRxMw09qFVHFQv2-Nri5",
+  "amazon_id": "arn:aws:sns:ap-southeast-1:470661122947:endpoint/GCM/snapdeal.com/39eaad91-ee5f-37bd-a0d3-b9c2b474d89a",
+  "email_id": "20amitbhatia@gmail.com"
+}
+
+
+
+{
+  "requestProtocol": "PROTOCOL_JSON",
+  "installation_source": "organic",
+  "platform": "android",
+  "oem": "samsung",
+  "responseProtocol": "PROTOCOL_JSON",
+  "advertisingId": "",
+  "network_type": "mobile",
+  "location": "",
+  "androidId": "7fa861334616956b",
+  "device_id": "352221060432669",
+  "IMEI_no": "352221060432669",
+  "orgID": "1001_1",
+  "apiKey": "snapdeal",
+  "os_version": "4.2.2",
+  "application_version": "5.5.7",
+  "phone_no": "",
+  "active": "true",
+  "push_token_id": "dPN-2VrDL_0:APA91bHGOZXUplMr_m094WGv-vU2JxO42G0iYtyIoTBR5rIu4ivNR2WWypWukDrIik4c8mPJB2LYCIULd6MOIdQzp4Knci1H1q1_ZNJBAKCyMwp5wKUYQKljQ-4GRyulcaIYEW2uS17t",
+  "amazon_id": "arn:aws:sns:ap-southeast-1:470661122947:endpoint/GCM/snapdeal.com/315244c2-d1e2-3397-9639-2992380744f5",
+  "email_id": "senthil6132@gmail.com"
+}
+
+{
+  "email_id": "surti06in@yahoo.co.in",
+  "advertisingid": "8B2A5D82-3DF5-44D5-A114-78F6F45AA83A",
+  "push_token_id": "e5708e449364a41857d8c954718a0c5ec46a8265a07ea9845d9368f853f59a44",
+  "active": "true",
+  "osVersion": "9.2.1",
+  "phone_no": "",
+  "networkType": "wifi",
+  "IMEI_no": "",
+  "pushEnabled": 1,
+  "platform": "ios",
+  "location": "",
+  "installationSource": "iTunes",
+  "orgID": "1001_1",
+  "device_id": "D9B48F96-424E-46B5-85E3-01216D2B2BE8",
+  "oem": "Apple",
+  "amazon_id": "arn:aws:sns:ap-southeast-1:470661122947:endpoint/APNS/snapdeal_ios_production/9e6f5571-5a4b-34ac-9109-43b8b85678c3",
+  "applicationVersion": "4.4.7"
+}
