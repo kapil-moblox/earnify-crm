@@ -1,7 +1,7 @@
 /*  Copyright 2016 Jasper Infotech (P) Limited . All Rights Reserved.
  *  JASPER INFOTECH PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 */  
-package com.crm.earnify.transformers;
+package com.crm.earnify.transformers.app;
 
 import com.crm.earnify.entities.app.AppEntity;
 import com.crm.earnify.request.app.AppModel;

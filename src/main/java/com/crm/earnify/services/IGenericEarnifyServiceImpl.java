@@ -4,7 +4,6 @@
 package com.crm.earnify.services;
 
 import com.crm.earnify.daos.IGenericEarnifyDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +15,20 @@ import java.util.Collection;
  *  @version     1.0, 20/2/16
  *  @author sandeepandey
  */
-@Service("genericEarnifyServiceImpl")
-public abstract class GenericEarnifyServiceImpl<E,K extends Serializable> implements GenericEarnifyService<E,K> {
+@Service
+public abstract class IGenericEarnifyServiceImpl<E,K extends Serializable> implements IGenericEarnifyService<E,K> {
 
-    @Autowired
+
     private IGenericEarnifyDao<E,K> i_generic_dao;
 
     //-------------------------------------------------------------------------------------
-    public GenericEarnifyServiceImpl(IGenericEarnifyDao<E,K> p_earnify_generic_dao) {
+    public IGenericEarnifyServiceImpl(IGenericEarnifyDao<E, K> p_earnify_generic_dao) {
         this.i_generic_dao = p_earnify_generic_dao;
+    }
+
+    //------------------------------------------------------------------------------------
+    public IGenericEarnifyServiceImpl() {
+
     }
 
 

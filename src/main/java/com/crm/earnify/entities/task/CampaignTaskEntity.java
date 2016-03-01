@@ -2,10 +2,12 @@ package com.crm.earnify.entities.task;
 
 import com.crm.earnify.entities.EarnifyPersistableEntity;
 import com.crm.earnify.entities.campaign.CampaignEntity;
+import com.crm.earnify.entities.task.executable.ExecutableTaskEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * @author sandeepandey
@@ -14,7 +16,7 @@ import javax.persistence.*;
  * @see com.crm.earnify.entities.EarnifyPersistableEntity
  * @see com.crm.earnify.entities.campaign.CampaignEntity
  */
-@Table(name = "campaign_tasks")
+@Table(name = "campaign_task_master",catalog = "earnifydb")
 @Entity
 public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
 
@@ -22,7 +24,7 @@ public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
 
     private Long id;
 
-    private CampaignEntity campaign;
+    private CampaignEntity attachCampaign;
 
     private String tagLine;
 
@@ -36,7 +38,13 @@ public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
 
     private String ctaURL;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") public Long getId() {
+    private Collection<ExecutableTaskEntity> attachExecutableTasks;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "campaign_task_id")
+    public Long getId() {
         return id;
     }
 
@@ -44,15 +52,18 @@ public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) public CampaignEntity getCampaign() {
-        return campaign;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "campaign_code")
+    public CampaignEntity getAttachCampaign() {
+        return attachCampaign;
     }
 
-    public void setCampaign(CampaignEntity campaign) {
-        this.campaign = campaign;
+    public void setAttachCampaign(CampaignEntity attachCampaign) {
+        this.attachCampaign = attachCampaign;
     }
 
-    @Column(name = "tagline") public String getTagLine() {
+    @Column(name = "campaign_task_tag_line")
+    public String getTagLine() {
         return tagLine;
     }
 
@@ -60,7 +71,7 @@ public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
         this.tagLine = tagLine;
     }
 
-    @Column(name = "instructions")
+    @Column(name = "campaign_task_instruction")
     public String getInstructions() {
         return instructions;
     }
@@ -69,6 +80,7 @@ public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
         this.instructions = instructions;
     }
 
+    @Column(name = "campaign_task_worth")
     public Long getWorth() {
         return worth;
     }
@@ -77,6 +89,7 @@ public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
         this.worth = worth;
     }
 
+    @Column(name = "campaign_payout_desc")
     public String getPayoutDes() {
         return payoutDes;
     }
@@ -85,6 +98,7 @@ public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
         this.payoutDes = payoutDes;
     }
 
+    @Column(name = "campaign_disclaimer")
     public String getDisclaimer() {
         return disclaimer;
     }
@@ -93,6 +107,7 @@ public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
         this.disclaimer = disclaimer;
     }
 
+    @Column(name = "campaign_cta_url")
     public String getCtaURL() {
         return ctaURL;
     }
@@ -101,8 +116,17 @@ public class CampaignTaskEntity extends EarnifyPersistableEntity<Long> {
         this.ctaURL = ctaURL;
     }
 
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "fromCampaignTask")
+    public Collection<ExecutableTaskEntity> getAttachExecutableTasks() {
+        return attachExecutableTasks;
+    }
+
+    public void setAttachExecutableTasks(Collection<ExecutableTaskEntity> attachExecutableTasks) {
+        this.attachExecutableTasks = attachExecutableTasks;
+    }
+
     @Override
-    public Long getID() {
+    public Long fetchKey() {
         return null;
     }
 }

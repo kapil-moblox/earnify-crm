@@ -4,11 +4,14 @@
 package com.crm.earnify.request.app;
 
 import com.crm.earnify.base.json.JSONizable;
+import com.crm.earnify.request.campaign.CampaignModel;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -34,6 +37,17 @@ public class AppModel implements JSONizable {
     private String packageName;
     private String appDomain;
     private Date lastUpdatedOnGooglePlay;
+    private Collection<CampaignModel> attachCampaigns;
+
+    public Collection<CampaignModel> getAttachCampaigns() {
+        if(attachCampaigns == null)
+            attachCampaigns = new ArrayList<>();
+        return attachCampaigns;
+    }
+
+    public void setAttachCampaigns(Collection<CampaignModel> attachCampaigns) {
+        this.attachCampaigns = attachCampaigns;
+    }
 
     public String getAppName() {
         return appName;

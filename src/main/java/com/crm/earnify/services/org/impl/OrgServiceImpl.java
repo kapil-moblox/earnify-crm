@@ -6,13 +6,15 @@ package com.crm.earnify.services.org.impl;
 import com.crm.earnify.daos.IGenericEarnifyDao;
 import com.crm.earnify.daos.org.IOrgDAO;
 import com.crm.earnify.entities.org.OrganizationalEntity;
-import com.crm.earnify.services.GenericEarnifyServiceImpl;
+import com.crm.earnify.services.IGenericEarnifyServiceImpl;
 import com.crm.earnify.services.org.IOrgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *  @version     1.0, 20/2/16
@@ -20,10 +22,11 @@ import org.springframework.stereotype.Service;
  */
 
 @Service("orgServiceImpl")
-public class OrgServiceImpl extends GenericEarnifyServiceImpl<OrganizationalEntity,Long> implements IOrgService {
+public class OrgServiceImpl extends IGenericEarnifyServiceImpl<OrganizationalEntity,Long> implements IOrgService {
 
     private static final Logger ELogger = LoggerFactory.getLogger(OrgServiceImpl.class);
 
+    @Autowired
     private IOrgDAO i_org_dao;
 
     //--------------------------------------------------------------------------------------------
@@ -45,6 +48,7 @@ public class OrgServiceImpl extends GenericEarnifyServiceImpl<OrganizationalEnti
      * @param p_org_entity_to_save_or_update
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void saveOrUpdateOrg(OrganizationalEntity p_org_entity_to_save_or_update) {
         this.i_org_dao.saveOrUpdateOrg(p_org_entity_to_save_or_update);
     }

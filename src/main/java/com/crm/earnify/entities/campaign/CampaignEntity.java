@@ -5,12 +5,14 @@ import com.crm.earnify.entities.addunit.AddUnitMaster;
 import com.crm.earnify.entities.app.AppEntity;
 import com.crm.earnify.entities.clicktype.ClickTypeEntity;
 import com.crm.earnify.entities.payouttype.PayoutTypeEntity;
+import com.crm.earnify.entities.task.CampaignTaskEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 @Table(name = "campaign_master")
 public class CampaignEntity extends EarnifyPersistableEntity<Long>{
 
@@ -23,16 +25,17 @@ public class CampaignEntity extends EarnifyPersistableEntity<Long>{
     private String campaignDescription;
     private Double campaignTotalValue;
     private Date campaignExpiration;
-    private AppEntity campaignApp;
+    private AppEntity fromApp;
     private String campaignTagLine;
     private String ctaURL;
     private AddUnitMaster addUnit;
     private ClickTypeEntity clickType;
     private PayoutTypeEntity payoutType;
+    private CampaignTaskEntity attachTask;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "campaign_id")
     public Long getId() {
         return id;
     }
@@ -95,13 +98,24 @@ public class CampaignEntity extends EarnifyPersistableEntity<Long>{
         this.campaignExpiration = campaignExpiration;
     }
 
-    @JoinColumn(name = "app_id")
-    public AppEntity getCampaignApp() {
-        return campaignApp;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "app_code")
+    public AppEntity getFromApp() {
+        return fromApp;
     }
 
-    public void setCampaignApp(AppEntity campaignApp) {
-        this.campaignApp = campaignApp;
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "attachCampaign")
+    public CampaignTaskEntity getAttachTask() {
+        return attachTask;
+    }
+
+    public void setAttachTask(CampaignTaskEntity attachTask) {
+        this.attachTask = attachTask;
+    }
+
+    public void setFromApp(AppEntity fromApp) {
+        this.fromApp = fromApp;
     }
 
     @Column(name = "campaign_tag_line")
@@ -122,7 +136,7 @@ public class CampaignEntity extends EarnifyPersistableEntity<Long>{
         this.ctaURL = ctaURL;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "attachCampaign")
     public AddUnitMaster getAddUnit() {
         return addUnit;
     }
@@ -131,7 +145,7 @@ public class CampaignEntity extends EarnifyPersistableEntity<Long>{
         this.addUnit = addUnit;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "attachCampaign",fetch = FetchType.LAZY)
     public ClickTypeEntity getClickType() {
         return clickType;
     }
@@ -140,7 +154,7 @@ public class CampaignEntity extends EarnifyPersistableEntity<Long>{
         this.clickType = clickType;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "attachCampaign")
     public PayoutTypeEntity getPayoutType() {
         return payoutType;
     }
@@ -150,7 +164,7 @@ public class CampaignEntity extends EarnifyPersistableEntity<Long>{
     }
 
     @Override
-    public Long getID() {
+    public Long fetchKey() {
         return getId();
     }
 }

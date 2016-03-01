@@ -7,16 +7,16 @@ import com.crm.earnify.entities.EarnifyPersistableEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *  @version     1.0, 14/2/16
  *  @author sandeepandey
  */
- public class PayoutTypeEntity extends EarnifyPersistableEntity<Long>{
+
+@Entity
+@Table(name = "payout_type_master",uniqueConstraints = {@UniqueConstraint(columnNames = "payout_type_code")})
+public class PayoutTypeEntity extends EarnifyPersistableEntity<Long>{
 
     public static final Logger ELogger = LoggerFactory.getLogger(PayoutTypeEntity.class);
 
@@ -24,11 +24,14 @@ import javax.persistence.Id;
 
     private String name;
 
+    private String code;
+
     private String desc;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "payout_type_id")
     public Long getId() {
         return id;
     }
@@ -37,6 +40,15 @@ import javax.persistence.Id;
         this.id = id;
     }
 
+    @Column(name = "payout_type_code",nullable = false,unique = true)
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+    @Column(name = "payout_type_desc")
     public String getDesc() {
         return desc;
     }
@@ -55,7 +67,7 @@ import javax.persistence.Id;
     }
 
     @Override
-    public Long getID() {
+    public Long fetchKey() {
         return getId();
     }
 }

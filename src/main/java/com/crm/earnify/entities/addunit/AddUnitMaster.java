@@ -4,27 +4,29 @@
 package com.crm.earnify.entities.addunit;
 
 import com.crm.earnify.entities.EarnifyPersistableEntity;
-import com.sun.istack.internal.logging.Logger;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author sandeepandey
  * @version 1.0, 14/2/16
  */
+@Entity
+@Table(name = "ad_unit_master",uniqueConstraints = {@UniqueConstraint(columnNames = "add_unit_code")})
 public class AddUnitMaster extends EarnifyPersistableEntity<Long> {
-    private static final Logger ELogger = Logger.getLogger(AddUnitMaster.class);
 
     private Long id;
 
-    private String addUnitType;
+    private String code;
 
     private String desc;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id")
+    private String name;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "add_unit_id")
     public Long getId() {
         return id;
     }
@@ -33,15 +35,17 @@ public class AddUnitMaster extends EarnifyPersistableEntity<Long> {
         this.id = id;
     }
 
-    @Column(name = "add_unit_type") public String getAddUnitType() {
-        return addUnitType;
+    @Column(name = "add_unit_code",unique = true,nullable = false)
+    public String getCode() {
+        return code;
     }
 
-    public void setAddUnitType(String addUnitType) {
-        this.addUnitType = addUnitType;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    @Column(name = "description") public String getDesc() {
+    @Column(name = "add_unit_desc")
+    public String getDesc() {
         return desc;
     }
 
@@ -49,15 +53,19 @@ public class AddUnitMaster extends EarnifyPersistableEntity<Long> {
         this.desc = desc;
     }
 
-    @Override public Long getID() {
+    @Column(name = "add_unit_name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    @Override
+    public Long fetchKey() {
         return getId();
     }
 
-    @Override public void assignID() {
-
-    }
-
-    @Override public boolean isNew() {
-        return true;
-    }
 }

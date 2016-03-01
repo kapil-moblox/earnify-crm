@@ -29,4 +29,5 @@ public interface IGenericEarnifyDao<E ,K extends Serializable> {
 
     //--------------------------------------------------------
     public List<E> getAll() ;
+
 }

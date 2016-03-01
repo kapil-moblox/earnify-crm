@@ -3,6 +3,11 @@
 */  
 package com.crm.earnify.base.json;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *  @version     1.0, 19/2/16
  *  @author sandeepandey
@@ -10,4 +15,8 @@ package com.crm.earnify.base.json;
 
 public interface JSONizable {
     public String toJSONString();
+
+    default Map<String,Object> toJSONMap() {
+        return new ObjectMapper().convertValue(toJSONString(),HashMap.class);
+    }
 }

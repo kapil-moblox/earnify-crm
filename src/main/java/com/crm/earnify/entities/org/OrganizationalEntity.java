@@ -9,11 +9,11 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "organization_master")
+@Table(name = "org_master",uniqueConstraints = {@UniqueConstraint(columnNames = "org_code")},catalog = "earnifydb")
 public class OrganizationalEntity extends EarnifyPersistableEntity<Integer> {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrganizationalEntity.class);
-    private Long id;
+    private Long orgId;
     private String orgName;
     private String orgCode;
     private String description;
@@ -21,18 +21,18 @@ public class OrganizationalEntity extends EarnifyPersistableEntity<Integer> {
 
 
     @Id
-    @Column(name = "org_id")
+    @Column(name = "org_id",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
+    public Long getOrgId() {
+        return orgId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
     }
 
 
-    @Column(name = "description")
+    @Column(name = "org_description")
     public String getDescription() {
         return description;
     }
@@ -41,7 +41,7 @@ public class OrganizationalEntity extends EarnifyPersistableEntity<Integer> {
         this.description = description;
     }
     @Override
-    public Integer getID() {
+    public Integer fetchKey() {
         return null;
     }
 
@@ -54,7 +54,7 @@ public class OrganizationalEntity extends EarnifyPersistableEntity<Integer> {
         this.orgName = orgName;
     }
 
-    @Column(name = "org_code")
+    @Column(name = "org_code",unique = true,nullable = false)
     public String getOrgCode() {
         return orgCode;
     }
@@ -71,16 +71,5 @@ public class OrganizationalEntity extends EarnifyPersistableEntity<Integer> {
 
     public void setLunchedApps(Collection<AppEntity> lunchedApps) {
         this.lunchedApps = lunchedApps;
-    }
-
-    @Override
-    public String toString() {
-        return "OrganizationalEntity{" +
-                "id=" + id +
-                ", orgName='" + orgName + '\'' +
-                ", orgCode='" + orgCode + '\'' +
-                ", description='" + description + '\'' +
-                ", lunchedApps=" + lunchedApps +
-                '}';
     }
 }

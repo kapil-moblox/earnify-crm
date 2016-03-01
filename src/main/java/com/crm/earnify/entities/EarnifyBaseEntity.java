@@ -9,9 +9,11 @@ import java.io.Serializable;
  */
 public interface EarnifyBaseEntity<K extends Serializable> {
 
-    public K getID();
+    public K fetchKey();
 
     public void assignID();
 
-    public boolean isNew() ;
+    default boolean testNew() {
+       return true;
+    }
 }

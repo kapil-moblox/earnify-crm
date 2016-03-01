@@ -1,7 +1,7 @@
  /*  Copyright 2016 Jasper Infotech (P) Limited . All Rights Reserved.
  *  JASPER INFOTECH PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */  
-package com.crm.earnify.controller;
+package com.crm.earnify.api.controller;
 
  import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

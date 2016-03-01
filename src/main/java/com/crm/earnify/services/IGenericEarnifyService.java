@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  *  @author sandeepandey
  */
 
-public interface GenericEarnifyService<E,K extends Serializable> {
+public interface IGenericEarnifyService<E,K extends Serializable> {
     //-------------------------------------------------------------
 
     /**

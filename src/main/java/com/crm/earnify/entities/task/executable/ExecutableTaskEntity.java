@@ -1,38 +1,38 @@
 /*  Copyright 2016 Jasper Infotech (P) Limited . All Rights Reserved.
  *  JASPER INFOTECH PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
-*/  
+*/
 package com.crm.earnify.entities.task.executable;
 
 import com.crm.earnify.entities.EarnifyPersistableEntity;
-import com.crm.earnify.entities.actiontype.ActionMasterEntity;
+import com.crm.earnify.entities.actiontype.ActionMaster;
 import com.crm.earnify.entities.task.CampaignTaskEntity;
-import com.crm.earnify.entities.task.CampaignTaskType;
+import com.crm.earnify.entities.task.ExecutableTaskType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
- *  @version     1.0, 19/2/16
- *  @author sandeepandey
+ * @author sandeepandey
+ * @version 1.0, 19/2/16
  */
 
+@Entity
+@Table(name = "executable_task_master")
 public class ExecutableTaskEntity extends EarnifyPersistableEntity<Long> {
     private static final Logger ELogger = LoggerFactory.getLogger(ExecutableTaskEntity.class);
 
-    private Long                   id;
-    private CampaignTaskEntity     parentTask;
-    private List<CampaignTaskType> taskType;
-    private List<ActionMasterEntity>      associatedAction;
-    private DependentExecutableTaskEntity dependentExecutableTaskEntity;
+    private Long id;
+    private CampaignTaskEntity fromCampaignTask;
+    private ExecutableTaskType attachExecutableTaskType;
+    private ActionMaster attachAction;
+    private ExecutableTaskEntity parent;
     //----------------------------------------------------------------------------------------
 
-    /**
-     *
-     * @return
-     */
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") public Long getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "executable_task_id")
+    public Long getId() {
         return id;
     }
 
@@ -40,53 +40,51 @@ public class ExecutableTaskEntity extends EarnifyPersistableEntity<Long> {
     public void setId(Long id) {
         this.id = id;
     }
-
     //-----------------------------------------------------------------------------------------
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) public CampaignTaskEntity getParentTask() {
-        return parentTask;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "campaign_task_id")
+    public CampaignTaskEntity getFromCampaignTask() {
+        return fromCampaignTask;
     }
 
     //------------------------------------------------------------------------------------------
-    public void setParentTask(CampaignTaskEntity parentTask) {
-        this.parentTask = parentTask;
+    public void setFromCampaignTask(CampaignTaskEntity fromCampaignTask) {
+        this.fromCampaignTask = fromCampaignTask;
     }
 
-    //------------------------------------------------------------------------------------------
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    public List<CampaignTaskType> getTaskTypes() {
-        return taskType;
-    }
-
-    //-----------------------------------------------------------------------------------------
-    public void setTaskType(List<CampaignTaskType> taskTypes) {
-        this.taskType = taskType;
-    }
-
-    //------------------------------------------------------------------------------------------
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    public List<ActionMasterEntity> getAssociatedActions() {
-        return associatedAction;
-    }
-
-    //-------------------------------------------------------------------------------------------
-    public void setAssociatedAction(List<ActionMasterEntity> associatedActions) {
-        this.associatedAction = associatedAction;
-    }
 
     //----------------------------------------------------------------------------------------
     @Override
-    public Long getID() {
-        return null;
+    public Long fetchKey() {
+        return getId();
     }
 
-    //--------------------------------------------------------------------------------------------
-    @OneToOne(mappedBy = "executableTask",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    public DependentExecutableTaskEntity getDependentExecutableTaskEntity() {
-        return dependentExecutableTaskEntity;
+    //------------------------------------------------------------------------------------------------------------------
+    @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    public ExecutableTaskType getAttachExecutableTaskType() {
+        return attachExecutableTaskType;
     }
 
-    //---------------------------------------------------------------------------------------------------------
-    public void setDependentExecutableTaskEntity(DependentExecutableTaskEntity dependentExecutableTaskEntity) {
-        this.dependentExecutableTaskEntity = dependentExecutableTaskEntity;
+    public void setAttachExecutableTaskType(ExecutableTaskType attachExecutableTaskType) {
+        this.attachExecutableTaskType = attachExecutableTaskType;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    public ActionMaster getAttachAction() {
+        return attachAction;
+    }
+
+    public void setAttachAction(ActionMaster attachAction) {
+        this.attachAction = attachAction;
+    }
+    @OneToOne
+    public ExecutableTaskEntity getParent() {
+        return parent;
+    }
+
+    public void setParent(ExecutableTaskEntity parent) {
+        this.parent = parent;
     }
 }

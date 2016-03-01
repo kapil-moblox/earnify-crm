@@ -7,16 +7,14 @@ import com.crm.earnify.entities.EarnifyPersistableEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *  @version     1.0, 14/2/16
  *  @author sandeepandey
  */
-
+@Entity
+@Table(name = "lock_types")
 public class LockTypeEntity extends EarnifyPersistableEntity<Long> {
 
     private static final Logger ELogger = LoggerFactory.getLogger(LockTypeEntity.class);
@@ -57,7 +55,7 @@ public class LockTypeEntity extends EarnifyPersistableEntity<Long> {
     }
 
     @Override
-    public Long getID() {
+    public Long fetchKey() {
         return getId();
     }
 }

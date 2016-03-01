@@ -1,17 +1,13 @@
 package com.crm.earnify.entities.audit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.*;
 import java.util.Date;
 
 /**
  *
  */
-public class RowAuditInfo {
 
-    private static final Logger ELogger = LoggerFactory.getLogger(RowAuditInfo.class);
+public class RowAuditInfo {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdOn",nullable = false)

@@ -4,14 +4,14 @@
 package com.crm.earnify.services.org;
 
 import com.crm.earnify.entities.org.OrganizationalEntity;
-import com.crm.earnify.services.GenericEarnifyService;
+import com.crm.earnify.services.IGenericEarnifyService;
 
 /**
  *  @version     1.0, 20/2/16
  *  @author sandeepandey
  */
 
-public interface IOrgService extends GenericEarnifyService<OrganizationalEntity,Long> {
+public interface IOrgService extends IGenericEarnifyService<OrganizationalEntity,Long> {
 
     //------------------------------------------------------------------------------------
 

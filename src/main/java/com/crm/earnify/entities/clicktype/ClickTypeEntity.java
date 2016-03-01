@@ -1,33 +1,30 @@
 /*  Copyright 2016 Jasper Infotech (P) Limited . All Rights Reserved.
  *  JASPER INFOTECH PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
-*/  
+*/
 package com.crm.earnify.entities.clicktype;
 
 import com.crm.earnify.entities.EarnifyPersistableEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
- *  @version     1.0, 14/2/16
- *  @author sandeepandey
+ * @author sandeepandey
+ * @version 1.0, 14/2/16
  */
- public class ClickTypeEntity extends EarnifyPersistableEntity<Long> {
-    private static final Logger ELogger = LoggerFactory.getLogger(ClickTypeEntity.class);
+@Entity
+@Table(name = "click_type_master",uniqueConstraints = {@UniqueConstraint(columnNames = "click_type_code")})
+public class ClickTypeEntity extends EarnifyPersistableEntity<Long> {
 
     private Long id;
 
     private String name;
 
+    private String code;
     private String desc;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "click_type_id")
     public Long getId() {
         return id;
     }
@@ -36,7 +33,25 @@ import javax.persistence.Id;
         this.id = id;
     }
 
+    @Column(name = "click_type_name")
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name = "click_type_code",unique = true,nullable = false)
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Column(name = "click_type_desc")
     public String getDesc() {
         return desc;
     }
@@ -46,7 +61,7 @@ import javax.persistence.Id;
     }
 
     @Override
-    public Long getID() {
+    public Long fetchKey() {
         return getId();
     }
 }

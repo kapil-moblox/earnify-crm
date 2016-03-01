@@ -1,23 +1,21 @@
 package com.crm.earnify.entities.app;
 
 import com.crm.earnify.entities.EarnifyPersistableEntity;
+import com.crm.earnify.entities.campaign.CampaignEntity;
 import com.crm.earnify.entities.org.OrganizationalEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author sandeepandey
  */
 @Entity
-@Table(name = "app_master")
+@Table(name = "app_master",uniqueConstraints = {@UniqueConstraint(columnNames = "app_code")},catalog = "earnifydb")
 public class AppEntity extends EarnifyPersistableEntity<Integer> {
 
-    private static final Logger ELogger = LoggerFactory.getLogger(AppEntity.class);
-
-    private Long id;
+    private Long appId;
     private String appName;
     private String appCode;
     private String appDescription;
@@ -31,18 +29,18 @@ public class AppEntity extends EarnifyPersistableEntity<Integer> {
     private String appVersion;
     private String packageName;
     private String appDomain;
-    private Date   lastUpdatedOnGooglePlay;
+    private Date lastUpdatedOnGooglePlay;
     private OrganizationalEntity fromOrganization;
-
-
+    private List<CampaignEntity> campaigns;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public Long getId() {
-        return id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "app_id")
+    public Long getAppId() {
+        return appId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 
 
@@ -55,7 +53,7 @@ public class AppEntity extends EarnifyPersistableEntity<Integer> {
         this.appName = appName;
     }
 
-    @Column(name = "app_code")
+    @Column(name = "app_code",nullable = false,unique = true)
     public String getAppCode() {
         return appCode;
     }
@@ -174,8 +172,8 @@ public class AppEntity extends EarnifyPersistableEntity<Integer> {
         this.lastUpdatedOnGooglePlay = lastUpdatedOnGooglePlay;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "org_id")
+    @JoinColumn(name = "org_id",nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     public OrganizationalEntity getFromOrganization() {
         return fromOrganization;
     }
@@ -184,28 +182,18 @@ public class AppEntity extends EarnifyPersistableEntity<Integer> {
         this.fromOrganization = fromOrganization;
     }
 
-    @Override
-    public Integer getID() {
-        return null;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "fromApp" )
+    public List<CampaignEntity> getCampaigns() {
+        return campaigns;
     }
 
+    public void setCampaigns(List<CampaignEntity> campaigns) {
+        this.campaigns = campaigns;
+    }
 
     @Override
-    public String toString() {
-        return "AppEntity{" +
-                "id=" + id +
-                ", appName='" + appName + '\'' +
-                ", appCode='" + appCode + '\'' +
-                ", appDescription='" + appDescription + '\'' +
-                ", appImage='" + appImage + '\'' +
-                ", appCatageory='" + appCatageory + '\'' +
-                ", appRating='" + appRating + '\'' +
-                ", appSize='" + appSize + '\'' +
-                ", appGooglePlayURL='" + appGooglePlayURL + '\'' +
-                ", appWebsiteURL='" + appWebsiteURL + '\'' +
-                ", appPromotionalBanner='" + appPromotionalBanner + '\'' +
-                ", lastUpdatedOnGooglePlay=" + lastUpdatedOnGooglePlay +
-                '}';
+    public Integer fetchKey() {
+        return null;
     }
 
 }

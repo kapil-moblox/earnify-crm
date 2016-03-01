@@ -8,6 +8,7 @@ import com.crm.earnify.request.app.AppModel;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -50,6 +51,9 @@ public class OrgModel implements JSONizable {
     }
 
     public Collection<AppModel> getLaunchedApps() {
+        if(launchedApps == null){
+            launchedApps = new ArrayList<>();
+        }
         return launchedApps;
     }
 

@@ -36,4 +36,8 @@ public interface IOrgDAO extends IGenericEarnifyDao<OrganizationalEntity,Long> {
      * @param p_org_id_to_remove - Org Id which is to be remove
      */
     public void removeOrg(Long p_org_id_to_remove);
+
+
+    //--------------------------------------------------------------------------------------
+    public OrganizationalEntity findByOrgCode(String p_org_code);
 }

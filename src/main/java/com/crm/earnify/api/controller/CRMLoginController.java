@@ -1,4 +1,4 @@
-package com.crm.earnify.controller;
+package com.crm.earnify.api.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
+@RequestMapping(value = "/",method = {RequestMethod.GET, RequestMethod.HEAD})
 public class CRMLoginController extends EarnifyController{
 	private static final Logger log = LoggerFactory.getLogger(CRMLoginController.class);
 	

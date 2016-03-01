@@ -5,9 +5,6 @@ package com.crm.earnify.entities.task.executable.install;
 
 import com.crm.earnify.entities.EarnifyPersistableEntity;
 import com.crm.earnify.entities.task.executable.ExecutableTaskEntity;
-import com.crm.earnify.enums.ExecutableTaskStatusEnum;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 
@@ -16,15 +13,17 @@ import javax.persistence.*;
  *  @author sandeepandey
  */
 @Entity
-@Table(name = "someValue")
+@Table(name = "install_executable_tasks")
  public class InstallExecutableTaskEntity extends EarnifyPersistableEntity<Long> {
-
-    private static final Logger LOG = LoggerFactory.getLogger(InstallExecutableTaskEntity.class);
 
 
     private Long id;
     private ExecutableTaskEntity executableTask;
-    private ExecutableTaskStatusEnum status;
+    private String status;
+
+    public InstallExecutableTaskEntity() {
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +36,7 @@ import javax.persistence.*;
         this.id = id;
     }
 
-
+    @OneToOne(fetch = FetchType.LAZY)
     public ExecutableTaskEntity getExecutableTask() {
         return executableTask;
     }
@@ -46,16 +45,17 @@ import javax.persistence.*;
         this.executableTask = executableTask;
     }
 
-    public ExecutableTaskStatusEnum getStatus() {
+    @Column(name = "status")
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(ExecutableTaskStatusEnum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     @Override
-    public Long getID() {
-        return null;
+    public Long fetchKey() {
+        return getId();
     }
 }

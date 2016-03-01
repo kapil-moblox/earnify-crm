@@ -4,21 +4,18 @@
 package com.crm.earnify.entities.actiontype;
 
 import com.crm.earnify.entities.EarnifyPersistableEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.crm.earnify.entities.actiontype.param.ActionParamMaster;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 /**
  *  @version     1.0, 14/2/16
  *  @author sandeepandey
  */
-
-public class ActionMasterEntity extends EarnifyPersistableEntity<Long>{
-    private static final Logger LOG = LoggerFactory.getLogger(ActionMasterEntity.class);
+@Entity
+@Table(name = "action_master",catalog = "earnifydb")
+public class ActionMaster extends EarnifyPersistableEntity<Long>{
 
 
     private Long id;
@@ -27,8 +24,9 @@ public class ActionMasterEntity extends EarnifyPersistableEntity<Long>{
 
     private String actionClass;
 
+    private Collection<ActionParamMaster> params;
     @Id
-    @Column(name = "id")
+    @Column(name = "action_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
@@ -57,8 +55,17 @@ public class ActionMasterEntity extends EarnifyPersistableEntity<Long>{
         this.actionClass = actionClass;
     }
 
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy="attachAction")
+    public Collection<ActionParamMaster> getParams() {
+        return params;
+    }
+
+    public void setParams(Collection<ActionParamMaster> params) {
+        this.params = params;
+    }
+
     @Override
-    public Long getID() {
+    public Long fetchKey() {
         return getId();
     }
 }
